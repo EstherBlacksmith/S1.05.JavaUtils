@@ -20,24 +20,20 @@ public class ListingFolders {
     protected void listSortedFiles() throws NullPointerException {
 
         try {
-
             String directoryPath = folderPath;
-
-            System.out.println(directoryPath);
-
             folderPathValidation(directoryPath);
 
             Path directory = Paths.get(folderPath);
 
             File[] filesArray = directory.toFile().listFiles();
-
+            Arrays.sort(filesArray);
             validatingDirectory(filesArray);
 
             System.out.println("Files are:");
 
-            Arrays.stream(filesArray)
-                    .sorted()
-                    .forEach(System.out::println);
+            for (File file : filesArray) {
+                System.out.println(file.getName());
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -54,8 +50,9 @@ public class ListingFolders {
             throw new FileNotFoundException("The indicated folder is a regular file");
         }
     }
-    private void validatingDirectory(File[] filesArray) throws NullPointerException{
-        if (filesArray == null ) {
+
+    private void validatingDirectory(File[] filesArray) throws NullPointerException {
+        if (filesArray == null) {
             throw new NullPointerException("The indicated folder is empty");
         } else if (filesArray.length == 0) {
             throw new NullPointerException("The indicated folder is empty");
