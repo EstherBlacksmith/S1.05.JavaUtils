@@ -1,14 +1,16 @@
 package lvl1.Ex1;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     static Scanner inputScanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        Execution execute = new Execution();
-        execute.ListFolderAlphabetically();
-
+    public static void main(String[] args) throws IOException {
+        Execution execute = new Execution("src" + File.separator + "folderToList");
+        execute.listFolderAlphabetically();
+        execute.listFolderRecursively();
     }
 
 

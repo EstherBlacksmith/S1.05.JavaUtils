@@ -2,10 +2,9 @@ package lvl1.Ex1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -15,6 +14,25 @@ public class ListingFolders {
 
     public ListingFolders(String folderPath) {
         this.folderPath = Objects.requireNonNull(folderPath);
+    }
+
+    protected void listRecursivelyFoldersAndFiles() throws IOException {
+        String directoryPath = folderPath;
+        folderPathValidation(directoryPath);
+
+        Path directory = Paths.get(folderPath);
+
+        File[] filesArray = directory.toFile().listFiles();
+        Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    System.out.println(  (attrs.isDirectory()?"D":"F")+ " " +file + " -- Modified: " +  attrs.lastModifiedTime());
+
+                return FileVisitResult.CONTINUE;
+            }
+        });
+
+
     }
 
     protected void listSortedFiles() throws NullPointerException {
