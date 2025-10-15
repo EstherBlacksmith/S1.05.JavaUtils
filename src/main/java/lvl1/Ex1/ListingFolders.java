@@ -2,11 +2,11 @@ package lvl1.Ex1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -20,33 +20,45 @@ public class ListingFolders {
     protected void listSortedFiles() throws NullPointerException {
 
         try {
-            Path folder = Paths.get(folderPath);
 
-            folderpathValidation(folder);
+            String directoryPath = folderPath;
 
-            File[] filesArray = folder.toFile().listFiles();
+            System.out.println(directoryPath);
 
-            if( filesArray == null){
-                throw new NullPointerException("The indicated folder is empty");
-            }
+            folderPathValidation(directoryPath);
+
+            Path directory = Paths.get(folderPath);
+
+            File[] filesArray = directory.toFile().listFiles();
+
+            validatingDirectory(filesArray);
 
             System.out.println("Files are:");
-            for(File filetoSort : filesArray){
-                System.out.println(filetoSort.getName());
-            }
 
-        }
-        catch (Exception e) {
+            Arrays.stream(filesArray)
+                    .sorted()
+                    .forEach(System.out::println);
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    private void folderpathValidation(Path folder) throws IOException {
-        if (Files.notExists(folder)) {
+
+    private void folderPathValidation(String directoryPath) throws NoSuchFileException, FileNotFoundException {
+        Path path = Paths.get(directoryPath);
+        if (Files.notExists(path)) {
             throw new NoSuchFileException("The indicated folder doesn't exist");
         }
 
-        if(Files.isRegularFile(Paths.get(String.valueOf(folder)))){
+        if (Files.isRegularFile(path)) {
             throw new FileNotFoundException("The indicated folder is a regular file");
+        }
+    }
+    private void validatingDirectory(File[] filesArray) throws NullPointerException{
+        if (filesArray == null ) {
+            throw new NullPointerException("The indicated folder is empty");
+        } else if (filesArray.length == 0) {
+            throw new NullPointerException("The indicated folder is empty");
         }
 
     }
