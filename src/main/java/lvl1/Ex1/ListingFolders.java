@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
@@ -19,16 +20,20 @@ public class ListingFolders {
     protected void listRecursivelyFoldersAndFiles() throws IOException {
         String directoryPath = folderPath;
         folderPathValidation(directoryPath);
-    String [] filesArray = new String[0];
         Path directory = Paths.get(folderPath);
 
+        ArrayList<String> filesNamesArray = new ArrayList<>();
         Files.walkFileTree(directory, new SimpleFileVisitor<>() {
+
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                System.out.println((attrs.isDirectory() ? "D" : "F") + " " + file + " -- Modified: " + attrs.lastModifiedTime());
+
+                String s = attrs.isDirectory() ? "D" : "F" + " " + file + " -- Modified: " + attrs.lastModifiedTime();
+                filesNamesArray.add(s);
                 return FileVisitResult.CONTINUE;
             }
         });
+        listingFilesIntoTxtFile(filesNamesArray);
     }
 
     protected void listSortedFiles() throws NullPointerException {
@@ -42,8 +47,6 @@ public class ListingFolders {
             File[] filesArray = directory.toFile().listFiles();
             Arrays.sort(filesArray);
             validatingDirectory(filesArray);
-
-            System.out.println("Files are:");
 
             listingFilesIntoTxtFile(filesArray);
         } catch (Exception e) {
@@ -71,22 +74,36 @@ public class ListingFolders {
 
     }
 
-    private String calendarForFileTittle(){
+    private String calendarForFileTittle() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         return format1.format(calendar.getTime());
     }
 
-    private Path preparePathForWriting(){
+    private Path preparePathForWriting(String listingType) {
         Path basePath = Paths.get("");
-        return basePath.resolve("src" + File.separator + "listOfFiles_" + calendarForFileTittle() + ".txt");
+        return basePath.resolve("src" + File.separator + listingType + "_" + calendarForFileTittle() + ".txt");
     }
 
     private void listingFilesIntoTxtFile(File[] filesArray) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(preparePathForWriting().toFile(), false));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(preparePathForWriting("OnlyFiles").toFile(), false));
             for (File files : filesArray) {
                 bufferedWriter.write(files.getName() + System.lineSeparator());
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        }
+
+    }
+
+    private void listingFilesIntoTxtFile(ArrayList<String> filesNamesArray) {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(preparePathForWriting("Recursively").toFile(), false));
+            bufferedWriter.write("Type  Name    Data" + System.lineSeparator());
+            for (String filesName : filesNamesArray) {
+                bufferedWriter.write(filesName + System.lineSeparator());
             }
             bufferedWriter.close();
         } catch (IOException e) {
