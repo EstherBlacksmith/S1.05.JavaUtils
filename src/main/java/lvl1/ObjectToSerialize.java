@@ -5,15 +5,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ObjectToSerialize implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String name;
     private int quantity;
     private String rollNo;
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     public ObjectToSerialize(String name, int quantity) {
-        this.name = Objects.requireNonNull(name,"Name can't be null");
-        if(quantity < 0){
+        this.name = Objects.requireNonNull(name, "Name can't be null");
+        if (quantity < 0) {
             throw new RuntimeException("Quantity must be positive");
         }
         this.quantity = quantity;

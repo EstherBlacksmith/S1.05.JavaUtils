@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class ManipulatingFiles {
-    public ManipulatingFiles() {}
+    public ManipulatingFiles() {
+    }
 
     protected void readingTxtFile(String pathFile) {
         File myObj = new File(pathFile);
@@ -15,14 +16,14 @@ public class ManipulatingFiles {
                 System.out.println(data);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred. " + e.getMessage() );
+            System.out.println("An error occurred. " + e.getMessage());
         }
     }
 
-    protected void serializeObject(String path,ObjectToSerialize objectToSerialize){
-        try{
+    protected void serializeObject(String path, ObjectToSerialize objectToSerialize) {
+        try {
             FileOutputStream fileOutputS = new FileOutputStream(path);
-            
+
             ObjectOutputStream ObjectOutputS = new ObjectOutputStream(fileOutputS);
 
             ObjectOutputS.writeObject(objectToSerialize);
@@ -31,15 +32,15 @@ public class ManipulatingFiles {
             fileOutputS.close();
 
             System.out.println("Serialized data is saved in " + path);
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    protected void deSerializeObject(String path){
+    protected void deSerializeObject(String path) {
         try {
 
-            FileInputStream fileInputS =  new FileInputStream(path );
+            FileInputStream fileInputS = new FileInputStream(path);
 
             ObjectInputStream ObjectInputS = new ObjectInputStream(fileInputS);
             ObjectToSerialize objectToDeSerialize = null;
@@ -51,7 +52,7 @@ public class ManipulatingFiles {
             System.out.println("Name = " + objectToDeSerialize.getName());
             System.out.println("Class Name = " + objectToDeSerialize.getQuantity());
 
-        }catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
