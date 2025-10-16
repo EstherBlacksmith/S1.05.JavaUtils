@@ -1,4 +1,4 @@
-package lvl1.Ex1;
+package lvl1;
 
 import java.io.IOException;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package lvl1.Ex1;
+package lvl1;
 
 import java.io.*;
 import java.nio.file.*;
