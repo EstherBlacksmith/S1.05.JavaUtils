@@ -8,12 +8,18 @@ public class Main {
     static Scanner inputScanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        Execution execute = new Execution("src" + File.separator + "folderToList");
+/*       Execution execute = new Execution("src" + File.separator + "folderToList");
+
         execute.listFolderAlphabetically();
-        execute.listFolderRecursively();
-        String fileToRead = "src" + File.separator + "listOfFiles_16-10-2025.txt";
-        ReadingFiles readingFiles = new ReadingFiles();
-        readingFiles.readingTxtFile(fileToRead);
+        execute.listFolderRecursively();*
+        String fileToRead = "src" + File.separator + "listOfFiles_16-10-2025.txt";*/
+
+        ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
+       //manipulatingFiles.readingTxtFile(fileToRead);
+
+        ObjectToSerialize object1 = new ObjectToSerialize("One",1);
+        manipulatingFiles.serializeObject("src" + File.separator + "objectSerialized.ser",object1);
+        manipulatingFiles.deSerializeObject("src" + File.separator + "objectSerialized.ser");
     }
 
 
