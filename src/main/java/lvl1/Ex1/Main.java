@@ -11,6 +11,9 @@ public class Main {
         Execution execute = new Execution("src" + File.separator + "folderToList");
         execute.listFolderAlphabetically();
         execute.listFolderRecursively();
+        String fileToRead = "src" + File.separator + "listOfFiles_16-10-2025.txt";
+        ReadingFiles readingFiles = new ReadingFiles();
+        readingFiles.readingTxtFile(fileToRead);
     }
 
 
