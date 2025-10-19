@@ -1,5 +1,3 @@
-package lvl1;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,8 +5,8 @@ import java.util.Objects;
 public class ObjectToSerialize implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private String name;
-    private int quantity;
+    private final String name;
+    private final int quantity;
     private String rollNo;
 
     public ObjectToSerialize(String name, int quantity) {

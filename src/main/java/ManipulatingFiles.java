@@ -1,14 +1,25 @@
-package lvl1;
-
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class ManipulatingFiles {
     public ManipulatingFiles() {
     }
 
+    private Path gettingRelativerPath(String pathFile){
+        pathFile = pathFile.replace(File.separator, "\\");
+        Path actualDirectoryUser = Paths.get(System.getProperty("user.dir"));
+        Path absolutPath = Paths.get(pathFile);
+        System.out.println(actualDirectoryUser);
+        System.out.println(pathFile);
+        Path relativePath = actualDirectoryUser.relativize(absolutPath);
+        return relativePath;
+    }
     protected void readingTxtFile(String pathFile) {
-        File myObj = new File(pathFile);
+
+        File myObj = new File(gettingRelativerPath(pathFile).toUri());
 
         try (Scanner myReader = new Scanner(myObj)) {
             while (myReader.hasNextLine()) {
@@ -39,7 +50,9 @@ public class ManipulatingFiles {
 
     protected void deSerializeObject(String path) {
         try {
-
+            if(!Files.exists(Path.of(path))){
+                throw new RuntimeException("The file doesn't even exists");
+            }
             FileInputStream fileInputS = new FileInputStream(path);
 
             ObjectInputStream ObjectInputS = new ObjectInputStream(fileInputS);
