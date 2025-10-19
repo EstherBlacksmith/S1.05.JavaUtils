@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jpackage" name="S1.05.JavaUtils">
+    <output-path>$PROJECT_DIR$/out/artifacts/S1_05_JavaUtils</output-path>
+    <root id="root">
+      <element id="archive" name="S1_05_JavaUtils.jar">
+        <element id="module-output" name="S1.05.JavaUtils" />
+      </element>
+    </root>
+  </artifact>
+</component>
