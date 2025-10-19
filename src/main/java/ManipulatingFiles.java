@@ -8,7 +8,7 @@ public class ManipulatingFiles {
     public ManipulatingFiles() {
     }
 
-    private Path gettingRelativerPath(String pathFile){
+    private Path gettingRelativerPath(String pathFile) {
         pathFile = pathFile.replace(File.separator, "\\");
         Path actualDirectoryUser = Paths.get(System.getProperty("user.dir"));
         Path absolutPath = Paths.get(pathFile);
@@ -17,6 +17,7 @@ public class ManipulatingFiles {
         Path relativePath = actualDirectoryUser.relativize(absolutPath);
         return relativePath;
     }
+
     protected void readingTxtFile(String pathFile) {
 
         File myObj = new File(gettingRelativerPath(pathFile).toUri());
@@ -50,7 +51,7 @@ public class ManipulatingFiles {
 
     protected void deSerializeObject(String path) {
         try {
-            if(!Files.exists(Path.of(path))){
+            if (!Files.exists(Path.of(path))) {
                 throw new RuntimeException("The file doesn't even exists");
             }
             FileInputStream fileInputS = new FileInputStream(path);
