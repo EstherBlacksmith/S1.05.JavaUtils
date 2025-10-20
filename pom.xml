@@ -29,7 +29,7 @@
                     <archive>
                         <manifest>
                             <manifestEntries>
-                                <mainClass>java.JavaUtilsExercises.Main</mainClass>
+                                <mainClass>java.JavaUtilsExercises_lvl_1_2.Main</mainClass>
                             </manifestEntries>
                         </manifest>
                     </archive>

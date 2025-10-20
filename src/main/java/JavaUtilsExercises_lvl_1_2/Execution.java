@@ -8,8 +8,9 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class Execution {
-    static Properties properties = new Properties();
+    static Properties properties ;
     public Execution() {
+        properties = new Properties();
     }
 
     private static String readString(String question, Scanner inputScanner) {
@@ -72,8 +73,11 @@ public class Execution {
     }
 
     protected void getProperties() {
-        try (InputStream input = Execution.class.getClassLoader().getResourceAsStream("config.properties")) {
-            properties.load(input);
+        try {
+            //Properties props = new Properties();
+        InputStream inStream = getClass().getResourceAsStream("/config.properties");
+      //  try (InputStream input = Execution.class.getClassLoader().getResourceAsStream("/config.properties")) {
+            properties.load(inStream);
         } catch (IOException e) {
             System.out.println("Sorry, unable to find config.properties");
             throw new RuntimeException(e);
