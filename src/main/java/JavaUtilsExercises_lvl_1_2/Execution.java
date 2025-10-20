@@ -1,16 +1,15 @@
-package JavaUtilsExercises.lvl1;
+package JavaUtilsExercises_lvl_1_2;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.InputMismatchException;
-import java.util.Objects;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Execution {
-    static String folderPath;
-
-    public Execution(String folderPath) {
-        Execution.folderPath = Objects.requireNonNull(folderPath);
+    static Properties properties = new Properties();
+    public Execution() {
     }
 
     private static String readString(String question, Scanner inputScanner) {
@@ -44,12 +43,14 @@ public class Execution {
 
     private static void option1() throws IOException {
         ListingFolders listingFolders = new ListingFolders();
-        listingFolders.listSortedFiles(folderPath);
+        String pathToStoreListingFiles = properties.getProperty("pathToStoreListingFiles");
+        listingFolders.listSortedFiles(pathToStoreListingFiles, properties.getProperty("pathToGetListingFiles"));
     }
 
     private static void option2() throws IOException {
         ListingFolders listingFolders = new ListingFolders();
-        listingFolders.listRecursivelyFoldersAndFiles(folderPath);
+        listingFolders.listRecursivelyFoldersAndFiles(properties.getProperty("pathToStoreListingFiles"),
+                properties.getProperty("pathToGetListingFiles"));
     }
 
     private static void option3() {
@@ -68,6 +69,16 @@ public class Execution {
     private static void option5() {
         ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
         manipulatingFiles.deSerializeObject("src" + File.separator + "objectSerialized.ser");
+    }
+
+    protected void getProperties() {
+        try (InputStream input = Execution.class.getClassLoader().getResourceAsStream("config.properties")) {
+            properties.load(input);
+        } catch (IOException e) {
+            System.out.println("Sorry, unable to find config.properties");
+            throw new RuntimeException(e);
+        }
+
     }
 
     protected void menu() throws IOException {

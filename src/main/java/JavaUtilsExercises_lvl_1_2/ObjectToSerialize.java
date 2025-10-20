@@ -1,4 +1,4 @@
-package JavaUtilsExercises.lvl1;
+package JavaUtilsExercises_lvl_1_2;
 
 import java.io.Serial;
 import java.io.Serializable;

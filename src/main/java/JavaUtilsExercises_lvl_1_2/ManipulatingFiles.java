@@ -1,7 +1,6 @@
-package JavaUtilsExercises.lvl1;
+package JavaUtilsExercises_lvl_1_2;
 
 import java.io.*;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +16,7 @@ public class ManipulatingFiles {
         Path absolutPath = Paths.get(pathFile);
         System.out.println(actualDirectoryUser);
         System.out.println(pathFile);
+
         try {
             return actualDirectoryUser.relativize(absolutPath);
 
