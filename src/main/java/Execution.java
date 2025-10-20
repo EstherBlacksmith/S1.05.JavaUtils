@@ -88,9 +88,9 @@ public class Execution {
                 "4. Serialize a Java Object\n" +
                 "5. DeSerialize the previous object\n" +
                 "0. Exit";
-        int option = 10;
+        int option = 0;
 
-        while (option != 0) {
+        while (true) {
             option = readInt(question, scannerOption);
             switch (option) {
                 case 1 -> {
