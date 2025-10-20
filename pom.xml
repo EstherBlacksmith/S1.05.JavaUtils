@@ -13,13 +13,14 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <url>file://${project.basedir}/target/repository</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -27,8 +28,9 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.Main</mainClass>
+                            <manifestEntries>
+                                <mainClass>java.JavaUtilsExercises.Main</mainClass>
+                            </manifestEntries>
                         </manifest>
                     </archive>
                 </configuration>
