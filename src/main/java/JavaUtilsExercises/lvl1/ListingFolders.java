@@ -1,4 +1,4 @@
-package JavaUtilsExercises;
+package JavaUtilsExercises.lvl1;
 
 import java.io.*;
 import java.nio.file.*;
@@ -7,17 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Objects;
 
 
 public class ListingFolders {
-    protected String folderPath;
 
-    public ListingFolders(String folderPath) {
-        this.folderPath = Objects.requireNonNull(folderPath);
+    public ListingFolders() {
     }
 
-    protected void listRecursivelyFoldersAndFiles() throws IOException {
+    protected void listRecursivelyFoldersAndFiles(String folderPath) throws IOException {
         String directoryPath = folderPath;
         folderPathValidation(directoryPath);
         Path directory = Paths.get(folderPath);
@@ -36,7 +33,7 @@ public class ListingFolders {
         listingFilesIntoTxtFile(filesNamesArray);
     }
 
-    protected void listSortedFiles() throws NullPointerException {
+    protected void listSortedFiles(String folderPath) throws NullPointerException {
 
         try {
             String directoryPath = folderPath;

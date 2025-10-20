@@ -1,4 +1,4 @@
-package JavaUtilsExercises;
+package JavaUtilsExercises.lvl1;
 
 import java.io.File;
 import java.io.IOException;

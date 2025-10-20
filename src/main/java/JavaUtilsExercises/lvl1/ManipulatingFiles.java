@@ -1,6 +1,7 @@
-package JavaUtilsExercises;
+package JavaUtilsExercises.lvl1;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -57,10 +58,13 @@ public class ManipulatingFiles {
     }
 
     protected void deSerializeObject(String path) {
+
+        if (!Files.exists(Path.of(path))) {
+            System.out.println("The file doesn't even exists");
+            return;
+        }
+
         try {
-            if (!Files.exists(Path.of(path))) {
-                throw new RuntimeException("The file doesn't even exists");
-            }
             FileInputStream fileInputS = new FileInputStream(path);
 
             ObjectInputStream ObjectInputS = new ObjectInputStream(fileInputS);
@@ -77,7 +81,6 @@ public class ManipulatingFiles {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
-
             throw new RuntimeException(e);
         }
     }

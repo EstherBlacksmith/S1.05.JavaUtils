@@ -1,4 +1,4 @@
-package JavaUtilsExercises;
+package JavaUtilsExercises.lvl1;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,12 +7,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Execution {
-    static ListingFolders folderToList;
     static String folderPath;
 
     public Execution(String folderPath) {
         Execution.folderPath = Objects.requireNonNull(folderPath);
-        folderToList = new ListingFolders(Objects.requireNonNull(Execution.folderPath));
     }
 
     private static String readString(String question, Scanner inputScanner) {
@@ -44,20 +42,14 @@ public class Execution {
         }
     }
 
-    private static void option5() {
-        ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
-        manipulatingFiles.deSerializeObject("src" + File.separator + "objectSerialized.ser");
-    }
-
     private static void option1() throws IOException {
-        Execution execute = new Execution(folderPath);
-        execute.listFolderAlphabetically();
+        ListingFolders listingFolders = new ListingFolders();
+        listingFolders.listSortedFiles(folderPath);
     }
 
-    private static void option4() {
-        ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
-        ObjectToSerialize object1 = new ObjectToSerialize("One", 1);
-        manipulatingFiles.serializeObject("src" + File.separator + "objectSerialized.ser", object1);
+    private static void option2() throws IOException {
+        ListingFolders listingFolders = new ListingFolders();
+        listingFolders.listRecursivelyFoldersAndFiles(folderPath);
     }
 
     private static void option3() {
@@ -67,17 +59,15 @@ public class Execution {
         manipulatingFiles.readingTxtFile(fileToRead);
     }
 
-    private static void option2() throws IOException {
-        Execution execute = new Execution(folderPath);
-        execute.listFolderRecursively();
+    private static void option4() {
+        ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
+        ObjectToSerialize object1 = new ObjectToSerialize("One", 1);
+        manipulatingFiles.serializeObject("src" + File.separator + "objectSerialized.ser", object1);
     }
 
-    protected void listFolderAlphabetically() throws IOException {
-        folderToList.listSortedFiles();
-    }
-
-    protected void listFolderRecursively() throws IOException {
-        folderToList.listRecursivelyFoldersAndFiles();
+    private static void option5() {
+        ManipulatingFiles manipulatingFiles = new ManipulatingFiles();
+        manipulatingFiles.deSerializeObject("src" + File.separator + "objectSerialized.ser");
     }
 
     protected void menu() throws IOException {
